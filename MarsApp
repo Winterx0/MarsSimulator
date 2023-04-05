@@ -1,0 +1,324 @@
+
+import { View, Button, Text, Image, ImageBackground, Animated, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+//imports expo constant components
+import Constants from 'expo-constants';
+
+const image = { uri: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dreamstime.com%2Fphotos-images%2Fmars-surface.html&psig=AOvVaw22cmKhWoJe3Uu2ZoUIkcp0&ust=1680768296961000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCPCKkcWokv4CFQAAAAAdAAAAABAD" };
+
+
+//function that creats home screen
+function Home({ navigation }) {
+  return (
+    <View style={styles.container}>
+    <View style={styles.container1}>
+    <ImageBackground source={image} style={styles.image}>
+    <Text style={{fontSize: 20, color: '#fff'}}>Welcome to Mars Simulator... You are now on board the EXO-MARS2525 ship. Press the button below to continue...
+      </Text>
+      </ImageBackground>
+    </View>
+      <Button title="Click To Start" onPress={() => navigation.navigate('Video1')} 
+      />
+    </View>      
+  );
+}
+
+function Video1({ navigation }) {
+  return (
+    <View style={styles.container}> 
+    <View style={styles.container1}> 
+    <Image source={{ uri: "https://media.giphy.com/media/oey8QY5L9C47K0rgyu/giphy.gif" }} />
+    </View>
+    <Button title="Continue" onPress={() => navigation.navigate('Mission')} 
+      />
+    </View>
+  );
+}
+setTimeout(Video1, 300);
+
+//function that creates second screen to navigate to
+function Mission({ navigation }) {
+  return (
+    <View style={styles.container}>
+    <View style={styles.container1}>
+    <ImageBackground source={image} style={styles.image}>
+      <Text style={{fontSize: 18, color: '#fff'}}>
+   
+        Mission to Mars initialized...
+        
+        The ship is boosting up for lift off...
+        
+        3...2...1...
+        
+        Destination Mars...
+        
+        Route being transmitted from Main Base on 
+        earth...
+        
+        The ship vibrates as it soars through the
+        atmosphere. You set it to auto pilot as you 
+        climb in your pod tonrest with your team
+        until you enter the gravitational pull of
+        Mars...
+        
+      </Text>
+      </ImageBackground>
+      </View>
+      <Button title="Continue" onPress={() => navigation.navigate('Video2')} />
+    </View>
+  );
+}
+
+function Video2({ navigation }) {
+  return (
+    <View style={styles.container}> 
+    <View style={styles.container1}> 
+    <Image source={{ uri: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDJhMDcyYjczYTRiMTcyZWM5Mzg0Nzg1NTdlYTA0ZjY4NDJkOTk2ZCZjdD1n/mzXesRIsgYxYkHZDTr/giphy.gif" }} />
+    </View>
+    <Button title="Continue" onPress={() => navigation.navigate('Mission2')} 
+      />
+    </View>
+  );
+}
+setTimeout(Video2, 300);
+
+function Mission2({ navigation }) {
+  return (
+    <View style={styles.container}>
+    <View style={styles.container1}>
+    <ImageBackground source={image} style={styles.image}>
+      <Text style={{fontSize: 18, color: '#fff'}}>
+      Pick an option to continue......
+        
+      </Text>
+      </ImageBackground>
+      </View>
+      <Button title="Land" onPress={() => navigation.navigate('Video3')} />
+      <Button title="End Game" onPress={() => navigation.navigate('Video4')} />
+    </View>
+  );
+}
+
+function Video3({ navigation }) {
+  return (
+    <View style={styles.container}> 
+    <View style={styles.container1}> 
+    <Image source={{ uri: "https://giphy.com/clips/nasa-2020-mars-rover-landing-yAaRv0DG2DtW2q8G31" }} />
+    </View>
+    <Button title="Continue" onPress={() => navigation.navigate('End')} 
+      />
+    </View>
+  );
+}
+setTimeout(Video3, 300);
+
+function Video4({ navigation }) {
+  return (
+    <View style={styles.container}> 
+    <View style={styles.container1}> 
+    <Image source={{ uri: "https://tenor.com/view/moon-explosion-gif-25892165" }} />
+    </View>
+    <Button title="Continue" onPress={() => navigation.navigate('End')} 
+      />
+    </View>
+  );
+}
+setTimeout(Video4, 300);
+
+
+function End({ navigation }) {
+  return (
+    <View style={styles.container}>
+    <View style={styles.container1}>
+    <ImageBackground source={image} style={styles.image}>
+      <Text style={{fontSize: 18, color: '#fff', justifyContent: 'center'}}>
+      GAME OVER
+      </Text>
+      </ImageBackground>
+      </View>
+      <Button title="Restart" onPress={() => navigation.navigate('Home')} />
+    </View>
+  );
+}
+
+
+//adding an image to home screen header
+function LogoTitle() {
+  return (
+    <View style={styles.container}>
+    <Image source={{ uri: "https://pngimg.com/uploads/mars_planet/mars_planet_PNG28.png" }} style={{ width: 40, height: 40, justifyContent: 'center', marginTop: 30 }} />
+      <View style={styles.container1}>
+    <Text style={{color: '#fff', fontWeight: 'bold', marginLeft: 80}}>MISSION TO MARS</Text>
+    </View>
+    </View> 
+  );
+}
+
+//enables navigator
+const Stack = createStackNavigator();
+
+//adds customizable components to multiple screens
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} />
+        }}
+      />
+      <Stack.Screen
+        name="Video1"
+        component={Video1}
+        options={{ 
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} /> 
+        }}
+      />
+      <Stack.Screen
+        name="Mission"
+        component={Mission}
+        options={{ 
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} /> 
+        }}
+      />
+      <Stack.Screen
+        name="Video2"
+        component={Video2}
+        options={{ 
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} /> 
+        }}
+      />
+      <Stack.Screen
+        name="Mission2"
+        component={Mission2}
+        options={{ 
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} /> 
+        }}
+      />
+      <Stack.Screen
+        name="Video3"
+        component={Video3}
+        options={{ 
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} /> 
+        }}
+      />
+      <Stack.Screen
+        name="Video4"
+        component={Video4}
+        options={{ 
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} /> 
+        }}
+      />
+      <Stack.Screen
+        name="End"
+        component={End}
+        options={{ 
+          headerStyle: {
+            backgroundColor: '#000',
+            flex: 1
+          },
+          headerTintColor: '#000',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignItems: 'row',
+          },
+        headerTitle: props => <LogoTitle {...props} /> 
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+
+//function to add GUI components
+const styles = StyleSheet.create({
+  container1: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 10,
+    backgroundColor: '#000',
+    padding: 8,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#000',
+    padding: 8,
+  },
+});
+
+//exports to application
+export default function App(){
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
